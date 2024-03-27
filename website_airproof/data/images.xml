@@ -1,0 +1,3 @@
+<record id="website.default_website" model="website">
+    <field name="logo" type="base64" file="website_airproof/static/src/img/content/logo.png"/>
+ </record>

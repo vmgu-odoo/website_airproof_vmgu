@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="layout" inherit_id="website.layout" name="Welcome Message">
+        <xpath expr="//header" position="before">
+           <!-- Content -->
+        </xpath>
+
+        <!--Position                       Description
+
+        replace                            Replaces the targeted node with the XPath content.
+        inside                             Adds the XPath content inside the targeted node.
+        before                             Adds the XPath content before the targeted node.
+        after                              Adds the XPath content after the targeted node.
+        attributes                         Adds the XPath content inside an attribute.-->
+
+
+        <!--This XPath adds a <div> before the <nav> that is a direct child of the <header>.-->
+
+         <xpath expr="//header/nav" position="before">
+            <div>Some content before the header</div>
+         </xpath>
+
+
+         <!--This XPath adds x_airproof_header in the class attribute of the header. You also need to define a separator attribute to add a space before the class you are adding.-->
+
+         <xpath expr="//header" position="attributes">
+            <attribute name="class" add="x_airproof_header" separator=" "/>
+         </xpath>
+
+
+         <!--This XPath removes x_airproof_header in the class attribute of the header. In this case, you don’t need to use the separator attribute.-->
+
+         <xpath expr="//header" position="attributes">
+            <attribute name="class" remove="x_airproof_header" />
+         </xpath>
+
+
+         <!--This XPath removes the first element with a .breadcrumb class.-->
+
+         <xpath expr="//*[hasclass('breadcrumb')]" position="replace"/>
+
+
+         <!--This XPath adds an extra <li> element after the last child of the <ul> element.-->
+
+         <xpath expr="//ul" position="inside">
+            <li>Last element of the list</li>
+         </xpath>
+         
+     </template>
+
+     <record id="header" model="ir.ui.view">
+        <field name="name">Airproof Header</field>
+        <field name="type">qweb</field>
+        <field name="key">website_airproof.header</field>
+        <field name="inherit_id" ref="website.layout"/>
+        <field name="mode">extension</field>
+        <field name="arch" type="xml">
+           <xpath expr="//header//nav" position="replace">
+              <!-- Static Content -->
+              <!-- Components -->
+              <!-- Editable areas -->
+           </xpath>
+        </field>
+     </record>
+
+     <record id="footer" model="ir.ui.view">
+        <field name="name">Airproof Footer</field>
+        <field name="type">qweb</field>
+        <field name="key">website_airproof.footer</field>
+        <field name="inherit_id" ref="website.layout"/>
+        <field name="mode">extension</field>
+        <field name="arch" type="xml">
+           <xpath expr="//div[@id='footer']" position="replace">
+              <div id="footer" class="oe_structure oe_structure_solo" t-ignore="true" t-if="not no_footer">
+                 <!-- Content -->
+              </div>
+           </xpath>
+        </field>
+     </record>
+
+     <!--copyright--> 
+     
+     <template id="copyright" inherit_id="website.layout">
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="replace">
+           <div class="o_footer_copyright" data-name="Copyright">
+              <!-- Content -->
+           </div>
+        </xpath>
+     </template>
+     
+</odoo>
